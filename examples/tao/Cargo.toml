@@ -6,4 +6,4 @@ edition = "2021"
 
 [dependencies]
 drag = { path = "../../crates/drag" }
-tao = "0.16"
+tao = "0.27"

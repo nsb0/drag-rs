@@ -7,15 +7,15 @@ edition = { workspace = true }
 license = { workspace = true }
 
 [dependencies]
-raw-window-handle = "0.5"
+raw-window-handle = "0.6"
 thiserror = "1"
 serde = { version = "1", optional = true }
 
 [dev-dependencies]
-tao = "0.16"
+tao = "0.27"
 winit = "0.29"
-wry = "0.24"
-tauri = "1"
+wry = "0.39"
+tauri = "2.0.0-beta"
 
 [target."cfg(target_os = \"macos\")".dependencies]
 cocoa = "0.25"
@@ -23,9 +23,9 @@ objc = "0.2"
 core-graphics = "0.23"
 
 [target."cfg(any(target_os = \"linux\", target_os = \"dragonfly\", target_os = \"freebsd\", target_os = \"openbsd\", target_os = \"netbsd\"))".dependencies]
-gtk = { version = "0.15", features = [ "v3_20" ] }
-gdk = { version = "0.15", features = [ "v3_20" ] }
-gdkx11 = "0.15"
+gtk = { version = "0.18", features = [ "v3_24" ] }
+gdk = { version = "0.18", features = [ "v3_24" ] }
+gdkx11 = "0.18"
 
 [target."cfg(target_os = \"windows\")".dependencies]
 dunce = "1"
