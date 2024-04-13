@@ -5,12 +5,8 @@
 use std::{collections::HashMap, path::PathBuf, sync::mpsc::channel};
 
 use serde::{ser::Serializer, Deserialize, Deserializer, Serialize};
-use tauri::{
-    api::ipc::CallbackFn,
-    command,
-    plugin::{Builder, TauriPlugin},
-    AppHandle, Runtime, Window,
-};
+use tauri::{command, plugin::{Builder, TauriPlugin}, AppHandle, Runtime, Window, WebviewWindow};
+use tauri::ipc::CallbackFn;
 
 type Result<T> = std::result::Result<T, Error>;
 
@@ -88,7 +84,7 @@ struct CallbackResult {
 #[command]
 async fn start_drag<R: Runtime>(
     app: AppHandle<R>,
-    window: Window<R>,
+    window: WebviewWindow<R>,
     item: DragItem,
     image: Image,
     on_event_fn: Option<CallbackFn>,
@@ -126,13 +122,14 @@ async fn start_drag<R: Runtime>(
                 move |result, cursor_pos| {
                     if let Some(on_event_fn) = on_event_fn {
                         let callback_result = CallbackResult { result, cursor_pos };
-                        let js = tauri::api::ipc::format_callback(
-                            on_event_fn,
-                            &serde_json::to_string(&callback_result).unwrap(),
-                        )
-                        .expect("unable to serialize DragResult");
-
-                        let _ = window.eval(js.as_str());
+                        // FIXME: tauri::ipc::format_callback is not exposed in Tauri 2.0...
+                        // let js = tauri::ipc::format_callback(
+                        //     on_event_fn,
+                        //     &serde_json::to_string(&callback_result).unwrap(),
+                        // )
+                        // .expect("unable to serialize DragResult");
+                        //
+                        // let _ = window.eval(js.as_str());
                     }
                 },
                 Default::default(),

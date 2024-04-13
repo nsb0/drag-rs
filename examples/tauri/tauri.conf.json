@@ -1,18 +1,10 @@
 {
+  "identifier": "dev.crabnebula.drag",
   "build": {
-    "distDir": "./index.html",
-    "devPath": "./index.html",
-    "withGlobalTauri": true
+    "frontendDist": "./index.html"
   },
-  "tauri": {
-    "bundle": {
-      "identifier": "dev.crabnebula.drag",
-      "icon": [
-        "../icon.png",
-        "../icon.ico"
-      ],
-      "resources": ["../icon.png"]
-    },
+  "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "title": "Drag",
@@ -20,10 +12,17 @@
         "height": 100
       }
     ],
-    "allowlist": {
-      "path": {
-        "all": true
-      }
+    "security": {
+      "csp": null
     }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "../icon.icns",
+      "../icon.ico",
+      "../icon.png"
+    ]
   }
 }
