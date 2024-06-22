@@ -217,7 +217,7 @@ pub fn start_drag<W: HasRawWindowHandle, F: Fn(DragResult, CursorPosition) + Sen
     on_drop_callback: F,
     _options: Options,
 ) -> crate::Result<()> {
-    if let RawWindowHandle::Win32(_w) = handle.raw_window_handle() {
+    if let Ok(RawWindowHandle::Win32(_w)) = handle.raw_window_handle() {
         match item {
             DragItem::Files(files) => {
                 init_ole();
